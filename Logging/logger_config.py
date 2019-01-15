@@ -1,6 +1,7 @@
 import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FOLDER_NAME = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
 
 LOGGING = {
