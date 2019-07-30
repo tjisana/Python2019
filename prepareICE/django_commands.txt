@@ -1,0 +1,60 @@
+Product.objects.all()
+
+Product.objects.create() --> create a new object
+
+field in Product --> models.TextFiled(blank=True, null=True) --> if adding a new field to existing data, what value
+    should old data have for new field? Use null=True to avoid error messages when adding new field
+
+blank=False makes a field required
+
+TEMPLATE :
+either create folders templates and template/pages
+OR
+create a templates folder and change the TEMPLATES variable in the settings.py
+look here for more info https://wsvincent.com/django-tips-template-structure/
+
+TEMPLATING:
+
+create base.html
+add {% block content %} {% endblock %}
+in html page that is inheriting from base.html add the following -->
+    {% extends 'base.html' %}
+
+    {% block content %}
+    {% endblock %}
+
+you can also include templates within your template by using {% include 'base_navbar.html' %}
+
+FOR LOOP in template
+
+{% for item in list_item %}
+    {{item}}
+    {{forloop.counter}}
+{% endfor %}
+
+{% if item==23 %}
+{% endif %}
+
+add filters to variables on templates
+{{item|add:22}} --> adds 22 to variable
+
+{{item|safe}} --> if item is a html markup, then safe renders it correctly on page as opposed to rendering it as a string
+https://docs.djangoproject.com/en/2.2/ref/templates/builtins/
+
+required=True is default on form fields
+
+FORM VALIDATION
+if we have a field called "title" that we want to valid (and by validation I dont mean the browsers builtin validation)
+Then we can add methods to the form class.
+eg.
+
+def clean_title(self):
+    pass # write validation checks here and raise forms.ValidationError if errors found
+
+from django.shortcuts import get_object_or_404 --> Use this with
+    obj = get_object_or_404(Product, id=my_id)
+
+OR use --> from django.http import Http404 and a try catch block where except block is
+    except Product.DoesNotExist:
+        raise Http404
+

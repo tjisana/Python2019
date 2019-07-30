@@ -1,0 +1,23 @@
+pipenv shell
+pipenv run python
+pipenv install -r requirements.txt
+
+assume we want a python package in dev environment but not in production environment
+we could do-->
+pipenv install pytest --dev
+
+pipenv uninstall django
+
+to change python versions.
+First edit Pipfile, then run pipenv --python 3.6
+
+to recreate an environment from a Pipfile --> pipenv install
+
+pipenv --venv
+
+pipenv check --> check for security issues
+
+pipenv lock
+
+pipenv install --ignore-pipfile --> this will create an environment from the pipfile.lock as opposed to using
+the pipfile which is the default

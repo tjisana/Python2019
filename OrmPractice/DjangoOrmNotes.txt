@@ -1,0 +1,29 @@
+https://www.reddit.com/r/django/comments/8tlscw/what_is_the_difference_between_db_indextrue_and/
+There are two kinds of indices: unique and non-unique. db_index=True will create the later, while unique=True will create the former.
+
+Use Meta classes to add functionality. E.g. ordering
+Use get_latest_by for automatic ordering
+Remember that if you want to reverse the order you can do "ordering = ["-pub_date"]"
+
+Getting from the db
+# the i is for case-Insensitive
+Tag.objects.get(slug__iexact='DJANGO')
+Tag.objects.get(slug__istartswith='DJ')
+Tag.objects.get(slug__contains='an')
+
+Remember get method should only return one object.
+Use try catch block if you think it may return more than one except Tag.MultipleObjectsReturned as e:
+
+Use values_list to return a tuple instead of the object. you can also select which fields
+Tag.objects.values_list('name', 'slug')
+To get a list use Tag.objects.values_list('name', flat=True) where flat=True
+
+When we use a ManyToManyField(Tag, related_name="blog_posts"), we can set related_name.
+assume we have a Tag variable called django. Then we can reverse lookup by django.blog_posts.all()
+But what if we didn't set the name. Then it would be django.post_set.all() Where "post" is the name of the reverse look up class
+Django adds "set" to the name of the reverse look up class
+
+In django's admin tab http://127.0.0.1:8000/admin/ class names are displayed based on what was used in the meta class verbose name
+e.g.
+    class Meta:
+        verbose_name = "news article"
